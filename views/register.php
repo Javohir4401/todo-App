@@ -12,7 +12,7 @@ require 'views/components/navbar.php';
         <div class="mb-3">
             <label for="registerEmail" class="form-label">Email</label>
             <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" name="email" required>
-        </div>рр
+        </div>
         <div class="mb-3">
             <label for="registerPassword" class="form-label">Password</label>
             <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" name="password" required>

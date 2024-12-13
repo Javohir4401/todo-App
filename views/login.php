@@ -27,4 +27,3 @@ require 'views/components/navbar.php';
     require 'views/components/footer.php';
     ?>
 </div>
-

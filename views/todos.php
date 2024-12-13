@@ -19,35 +19,16 @@ require 'views/components/navbar.php';
                 </div>
             </form>
             <ul class="list-group">
-
-
                 <?php
                 /** @var TYPE_NAME $todos */
-                foreach ($todos as $data)
-                {
-                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
-                            . $data['title'] . '
-                                <div>
-                                    <a href="/todos/' . $data['id'] . '/edit" class="btn btn-outline-primary">Edit</a>
-                                    <a href="/todos/' . $data['id'] . '/delete" class="btn btn-outline-danger">Delete</a>
-                                </div>                                
-                           </li>';
-//                    elseif ($data['status'] == 'pending') {
-//                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
-//                            . $data['title'] . '
-//                                <div>
-//                                    <a href="/todos/' . $data['id'] . '/inProgress" class="btn btn-outline-success">In progress</a>
-//                                    <a href="/todos/' . $data['id'] . '/complete" class="btn btn-outline-success">Complete</a>
-//                                </div>
-//                            </li>';
-//                    } elseif ($data['status'] == 'in_progress') {
-//                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
-//                            . $data['title'] . '
-//                                <div>
-//                                    <a href="/todos/' . $data['id'] . '/pending" class="btn btn-outline-success">Pending</a>
-//                                    <a href="/todos/' . $data['id'] . '/complete" class="btn btn-outline-success">Complete</a>
-//                                </div>
-//                            </li>';
+                foreach ($todos as $data)  {
+                    echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
+                        . $data['title'] . '
+                            <div>
+                                <a href="/todos/' . $data['id'] . '/edit" class="btn btn-outline-primary">Edit</a>
+                                <a href="/todos/' . $data['id'] . '/delete" class="btn btn-outline-danger">Delete</a>
+                            </div>                                
+                          </li>';
                 }
                 ?>
             </ul>

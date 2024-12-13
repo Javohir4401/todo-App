@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 require 'bootstrap.php'; // Hammasidan oldin bootstrap.php ni chaqirib olamiz. Bo'lmasa DB.php da muamo bo'ladi
-require 'helpers.php';
 
 use App\Router;
 
@@ -23,9 +22,9 @@ $router->get('/login', fn() => view('login'));
 
 $router->post('/login', fn() =>  require 'Controllers/logincontroller.php'); // Agar login get bolsa. Login UI
 
-$router->get('/todos', fn()=> require 'Controllers/todosController.php'); // Hammasini ekranga chiqarishga
+$router->get('/todos', fn()=> require 'Controllers/getTodosController.php'); // Hammasini ekranga chiqarishga
 
-$router->post('/todos', fn()=> require 'Controllers/writeController.php'); // Yozish
+$router->post('/todos', fn()=> require 'Controllers/storeTodoController.php'); // Yozish
 
 $router->get('/todos/{id}/edit', fn($todoId) => require 'Controllers/editController.php'); // Edit qilishga
 

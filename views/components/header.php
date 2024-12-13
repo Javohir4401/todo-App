@@ -90,7 +90,7 @@
 
         .in_progress {
             text-decoration: underline;
-            color: yellow;
+            color: #ffae00;
         }
         .home-body {
             background-color: #f8f9fa;
