@@ -13,7 +13,7 @@ require 'views/components/navbar.php';
             <label for="loginPassword" class="form-label">Password</label>
             <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Enter your password" required>
         </div>
-        <div class="d-grid">
+        <div class="d'-grid">
             <p class="text-danger text-center" style="display: block;"><?= $_SESSION['error_message'] ?? ''?></p>
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
