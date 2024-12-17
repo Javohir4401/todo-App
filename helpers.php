@@ -18,7 +18,7 @@ function dumpDie($value){
     exit();
 }  // Xatoliklarni tekshirib oldini olish uchun
 #[NoReturn] function apiResponse($data): void {
-    header('Content-Type: applicatoin/json');
+    header('Content-Type: application/json');
     echo json_encode($data);
     exit();
 }
