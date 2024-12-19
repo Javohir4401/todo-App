@@ -22,7 +22,6 @@ class User {
         if ($select->rowCount() > 0) {
             return false;
         }
-
         $query = "INSERT INTO users (full_name, password, email) 
                     VALUES (:username, :password, :email)";
         $stmt = $this->pdo->prepare($query);
@@ -49,6 +48,23 @@ class User {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ':id' => $id
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function setTelegramId(int $id, int $telegramId): void {
+        $query = "UPDATE users SET telegram_id = :telegramId WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':id' => $id,
+            ':telegramId' => $telegramId
+        ]);
+    }
+
+    public function getAllUsers($chatId): array {
+        $query = "SELECT id as user_id FROM users WHERE telegram_id = :chat_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':chat_id' => $chatId
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

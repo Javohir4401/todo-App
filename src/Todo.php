@@ -51,5 +51,21 @@ class Todo{
             ":dueDate" => $dueDate,
         ]);
     }
+    public function updateStatus(int $id, string $status): bool{
+        $query = "UPDATE todos SET status=:status,updated_at=NOW() where id=:id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ":id" => $id,
+            ":status" => $status,
+        ]);
+    }
+    public function getTodoByTelegramId(int $telegramId): array {
+        $query = "SELECT todos.title,todos.status,todos.due_date, todos.id as task_id FROM todos INNER JOIN todo_app.users users on todos.user_id = users.id WHERE users.telegram_id=:telegramId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ":telegram_id" => $telegramId,
+        ]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 }
