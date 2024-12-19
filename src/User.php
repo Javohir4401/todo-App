@@ -5,16 +5,16 @@ use PDO;
 
 class User {
     public $pdo;
-    public function __construct() {
+    public function __construct(){
         $db = new DB();
         $this->pdo = $db->conn;
     }
 
-    public function register(
+    public function     register(
         string $fullName,
         string $email,
         string $password
-    ): mixed {
+    ): mixed{
 
         $select = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $select->bindParam(":email", $email);
@@ -22,6 +22,7 @@ class User {
         if ($select->rowCount() > 0) {
             return false;
         }
+
         $query = "INSERT INTO users (full_name, password, email) 
                     VALUES (:username, :password, :email)";
         $stmt = $this->pdo->prepare($query);
@@ -30,8 +31,8 @@ class User {
             ':password' => $password,
             ':email' => $email
         ]);
-         $id = $this->pdo->lastInsertId();
-         return $this->getUserById($id);
+        $id = $this->pdo->lastInsertId();
+        return $this->getUserById($id);
     }
 
     public function login(string $email, string $password): array | bool {
@@ -51,21 +52,16 @@ class User {
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function setTelegramId(int $id, int $telegramId): void {
-        $query = "UPDATE users SET telegram_id = :telegramId WHERE id = :id";
+
+
+    public function setTelegramId(int $userId, int $chatId){
+        $query = "UPDATE users SET telegram_id = :chatId WHERE id = :user_id";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
-            ':id' => $id,
-            ':telegramId' => $telegramId
+            ':chatId' => $chatId,
+            ':user_id' => $userId
         ]);
+
     }
 
-    public function getAllUsers($chatId): array {
-        $query = "SELECT id as user_id FROM users WHERE telegram_id = :chat_id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([
-            ':chat_id' => $chatId
-        ]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 }

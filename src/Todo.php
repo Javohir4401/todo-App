@@ -9,18 +9,18 @@ class Todo{
         $this->pdo = $db->conn;
     }
 
-    public function store($title, $dueDate, $userID){
-        $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at , user_Id) 
+    public function store($title, $dueDate, $userId){
+        $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at, user_id) 
                 VALUES (:title, 'pending', :dueDate, NOW(), NOW(), :userId)";
         $this->pdo->prepare($query)->execute([
             ":title" => $title,
             ":dueDate" => $dueDate,
-            ":userId" => $userID,
+            ":userId" => $userId
         ]);
     }
 
     public function getAllTodos($userId): array{
-        $query = "SELECT * FROM todos WHERE user_Id = $userId";
+        $query = "SELECT * FROM todos WHERE user_id = $userId";
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -48,22 +48,27 @@ class Todo{
             ":id" => $id,
             ":title" => $title,
             ":status" => $status,
-            ":dueDate" => $dueDate,
+            ":dueDate" => $dueDate
         ]);
     }
+
+
     public function updateStatus(int $id, string $status): bool{
-        $query = "UPDATE todos SET status=:status,updated_at=NOW() where id=:id";
+        $query = "UPDATE todos SET status=:status, updated_at=NOW() where id=:id";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ":id" => $id,
-            ":status" => $status,
+            ":status" => $status
         ]);
     }
-    public function getTodoByTelegramId(int $telegramId): array {
-        $query = "SELECT todos.title,todos.status,todos.due_date, todos.id as task_id FROM todos INNER JOIN todo_app.users users on todos.user_id = users.id WHERE users.telegram_id=:telegramId";
+
+
+
+    public function getTodoByTelegramId (int $chatId){
+        $query = "SELECT todos.title, todos.status, todos.due_date, todos.id as task_id FROM todos INNER JOIN users on todos.user_id = users.id WHERE users.telegram_id = :chatId";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
-            ":telegram_id" => $telegramId,
+            ":chatId" => $chatId
         ]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

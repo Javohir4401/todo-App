@@ -22,7 +22,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/todos">To-do List</a></li>
                             <li><a class="dropdown-item" href="/todos"><?= $_SESSION['user']['full_name'] ?? '' ?></a></li>
-                            <li class="nav-item"><a class="btn btn-primary" href="https://t.me/@nt_php_todo_App_bot?start=<?= $_SESSION['user']['id'] ?> " target="_blank">Telegram</a></li>
+                            <li class="nav-item"><a class="dropdown-item text-primary" href="https://t.me/nt_php_todo_App_bot?start=<?= $_SESSION['user']['id'] ?> " target="_blank">Telegram</a></li>
                             <li class="nav-item"><a class="btn btn-primary" href="/logout">home</a></li>
                         </ul>
                     </li>
