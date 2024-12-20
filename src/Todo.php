@@ -73,4 +73,13 @@ class Todo{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function updateTitle($id, $title){
+        $query="Update todos Set title=:title , updated_at=NOW() where id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ":id" => $id,
+            ":title" => $title,
+        ]);
+    }
+
 }
